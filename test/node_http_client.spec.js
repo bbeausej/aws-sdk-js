@@ -80,7 +80,7 @@
         });
         
         it('should respect tls reject unauthorized environment variable off', function(done) {
-          process.env.NODE_TLS_REJECT_UNAUTHORIZED === '0';
+          process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
           var req;
           req = new AWS.HttpRequest('https://invalid');
           return http.handleRequest(req, {timeout: 1}, null, function(err) {
@@ -93,7 +93,7 @@
         });
         
         it('should respect tls reject unauthorized environment variable on', function(done) {
-          process.env.NODE_TLS_REJECT_UNAUTHORIZED === '1';
+          process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1';
           var req;
           req = new AWS.HttpRequest('https://invalid');
           return http.handleRequest(req, {timeout: 1}, null, function(err) {
