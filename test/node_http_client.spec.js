@@ -106,6 +106,7 @@
         });
         
         it('should default to reject unauthorized if environment variable not present', function(done) {
+          var tempUnauthorized = process.env.NODE_TLS_REJECT_UNAUTHORIZED;
           delete process.env.NODE_TLS_REJECT_UNAUTHORIZED;
           var req;
           req = new AWS.HttpRequest('https://invalid');
@@ -113,6 +114,7 @@
             expect(AWS.NodeHttpClient.agent).to.be.undefined;
             expect(AWS.NodeHttpClient.sslAgent).not.to.be.undefined;
             expect(AWS.NodeHttpClient.sslAgent.options.rejectUnauthorized).to.equal(true);
+            process.env.NODE_TLS_REJECT_UNAUTHORIZED = tempUnauthorized;
             return done();
           });
         });
